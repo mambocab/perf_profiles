@@ -46,9 +46,15 @@ queries:
    latest:                # simple select, no slice, match on 2 fields
       cql: select * from trades where instrumentid = ? and day = ? ORDER BY second DESC, millisecond DESC LIMIT 1
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
+   latestnodesc:          # simple select, no slice, match on 2 fields
+      cql: select * from trades where instrumentid = ? and day = ? ORDER BY second, millisecond LIMIT 1
+      fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
    point:                 # simple select, no slice, match on 3 fields
       cql: select * from trades where instrumentid = ? and day = ? and second = ? ORDER BY second DESC, millisecond DESC LIMIT 1
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
    range:                 # simple select, match on 2 fields, slice on 1
       cql: select * from trades where instrumentid = ? and day = ? and second > ? ORDER BY second DESC, millisecond DESC LIMIT 100
+      fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
+   rangenodesc:           # simple select, match on 2 fields, slice on 1
+      cql: select * from trades where instrumentid = ? and day = ? and second > ? ORDER BY second, millisecond LIMIT 100
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
