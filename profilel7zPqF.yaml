@@ -1,0 +1,35 @@
+# https://gist.githubusercontent.com/ptnapoleon/bdc9390edb0b004691bd/raw/51f02a588be9fccda304c263546f1b9cf6de33a4/dtcs.yaml
+keyspace: ks
+
+keyspace_definition: |
+  CREATE KEYSPACE ks WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+# Table name
+table: tab
+
+# The CQL for creating a table you wish to stress (optional if it already exists)
+table_definition: |
+  CREATE TABLE tab (
+      key uuid,
+      year int,
+      month int,
+      day int,
+      c0 blob,
+      c1 blob,
+      c2 blob,
+      c3 blob,
+      c4 blob,
+      c5 blob,
+      c6 blob,
+      c7 blob,
+      c8 blob,
+      PRIMARY KEY ((year, month, day), key)
+  ) WITH compaction = {'class': 'org.apache.cassandra.db.compaction.DateTieredCompactionStrategy'};
+
+insert:
+  batchtype: UNLOGGED
+
+queries:
+   query:
+    cql: Select * from tab where year = ? and month = ? and day = ? limit 1000
+    fields: samerow
