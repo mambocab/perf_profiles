@@ -32,15 +32,15 @@ table_definition: |
         price double ,
         volume double,
         PRIMARY KEY((instrumentid, day), second, millisecond)
-  ) 
-  WITH CLUSTERING ORDER BY (second DESC, millisecond DESC) 
+  )
+  WITH CLUSTERING ORDER BY (second DESC, millisecond DESC)
   AND compaction = { 'class':'LeveledCompactionStrategy' };
 
 columnspec:
   - name: second
-    cluster: uniform(50..100)
+    cluster: uniform(50..55)
   - name: millisecond
-    cluster: uniform(50..100)
+    cluster: uniform(50..55)
 
 queries:
    latest:
