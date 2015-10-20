@@ -1,4 +1,4 @@
-# http://enigmacurry.com/tmp/abtests.yaml
+# based on http://enigmacurry.com/tmp/abtests.yaml
 keyspace: abtests
 keyspace_definition: |
   CREATE KEYSPACE abtests WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 2};

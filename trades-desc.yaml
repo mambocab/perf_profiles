@@ -1,4 +1,4 @@
-# https://gist.githubusercontent.com/belliottsmith/a28bd811309191195338/raw/61e096e0cf528c8e6b5e5738fef4001add509692/trades-asc.yaml
+# based on https://gist.githubusercontent.com/belliottsmith/a28bd811309191195338/raw/61e096e0cf528c8e6b5e5738fef4001add509692/trades-asc.yaml
 # Command line suggestions
 # user
 #      ops(insert=100,latest=100,point=10,range=1) 
