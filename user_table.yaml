@@ -63,5 +63,6 @@ queries:
    read:
       cql: select * from allocations where user_id = ? and profile_id = ? LIMIT 50
       fields: multirow             # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
-   readslice:
+   readslice:                      # reads a wide slice
       cql: select * from allocations where test_id > 15
+      fields: multirow
