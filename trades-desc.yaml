@@ -38,9 +38,9 @@ table_definition: |
 
 columnspec:
   - name: second
-    cluster: uniform(50..55)
+    cluster: uniform(10..15)
   - name: millisecond
-    cluster: uniform(50..55)
+    cluster: uniform(10..15)
 
 queries:
    latest:
