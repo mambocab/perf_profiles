@@ -1,20 +1,4 @@
 # based on https://gist.githubusercontent.com/belliottsmith/a28bd811309191195338/raw/61e096e0cf528c8e6b5e5738fef4001add509692/trades-asc.yaml
-# Command line suggestions
-# user
-#      ops(insert=100,latest=100,point=10,range=1)
-#      n=1B
-# -rate threads=50
-# -pop seq=1..1M
-#      contents=SORTED
-#      read-lookback=uniform(1..1M)
-# -insert visits=fixed(100K)
-#         revisit=uniform(1..1M)"
-
-# Variations to try:
-# Increased RF
-# compaction strategies;
-# ASC order by
-# Different operation distributions
 
 keyspace: findata
 
@@ -38,9 +22,9 @@ table_definition: |
 
 columnspec:
   - name: second
-    cluster: uniform(10..15)
+    cluster: uniform(1..5)
   - name: millisecond
-    cluster: uniform(10..15)
+    cluster: uniform(1..5)
 
 queries:
    latest:                # simple select, no slice, match on 2 fields
