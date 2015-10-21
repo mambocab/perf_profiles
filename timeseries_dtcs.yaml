@@ -1,4 +1,10 @@
 # https://gist.githubusercontent.com/ptnapoleon/bdc9390edb0b004691bd/raw/51f02a588be9fccda304c263546f1b9cf6de33a4/dtcs.yaml
+
+# dtcs timeseries profile
+# run with
+# cassandra-stress user profile=secondary_index.yaml ops\(insert=1\) n=10M -rate threads=300
+# cassandra-stress user profile=secondary_index.yaml ops\(query=1\) n=10M -rate threads=300
+
 keyspace: ks
 
 keyspace_definition: |
@@ -30,6 +36,6 @@ insert:
   batchtype: UNLOGGED
 
 queries:
-   query:
+  query:
     cql: Select * from tab where year = ? and month = ? and day = ? limit 1000
     fields: samerow
