@@ -1,6 +1,9 @@
-# http://pastebin.com/raw.php?i=8JPCyMkw
-# Performance Testing
-# Small Row
+# based on http://pastebin.com/raw.php?i=8JPCyMkw
+
+# run with
+# cassandra-stress user profile=secondary_index.yaml ops\(insert=1\) n=10M cl=QUORUM -rate threads=300
+# cassandra-stress user profile=secondary_index.yaml ops\(readindex=1\) n=10M cl=QUORUM -rate threads=300
+# cassandra-stress user profile=secondary_index.yaml ops\(readindexreverse=1\) n=10M cl=QUORUM -rate threads=300
 
 keyspace: perftesting2
 
@@ -47,4 +50,7 @@ queries:
     fields: samerow
   readindex:
     cql: select * from users where last_name = ?
+    fields: samerow
+  readindex:
+    cql: select * from users where last_name = ? ORDER BY last_name DESC
     fields: samerow

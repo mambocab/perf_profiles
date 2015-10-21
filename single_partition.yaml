@@ -1,4 +1,9 @@
-# http://pastebin.com/raw.php?i=9U5EMdVq
+# based on http://pastebin.com/raw.php?i=9U5EMdVq
+
+# test slice query over single partition with clustering columns with
+# cassandra-stress user profile=./clustering_cols_slice.yaml ops\(insert=1\) n=10M -rate threads=300
+# cassandra-stress user profile=./clustering_cols_slice.yaml ops\(slice=1\) n=10M -rate threads=300
+
 keyspace: extreme
 keyspace_definition: |
   CREATE KEYSPACE extreme WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': 1 };
@@ -30,9 +35,9 @@ insert:
   batchtype: UNLOGGED
 
 queries:
-   #chunk:
-   #   cql: select data from chunks where name = ? and id = ?
-   #   fields: samerow
+   chunk:
+      cql: select data from chunks where name = ? and id = ?
+      fields: samerow
    slice:
       cql: select val from extreme where partition_key = ? and clustering_col0 = ? and clustering_col1 = ?
       fields: samerow

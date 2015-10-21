@@ -46,5 +46,11 @@ queries:
     cql: select * from allocations where user_id = ? and profile_id = ? LIMIT 50
     fields: multirow             # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
   readslice:                      # reads a wide slice
-    cql: select * from allocations where test_id > ?
+    cql: select * from allocations where test_id > ? and profile_id < ?
     fields: multirow
+  deletecells:
+    cql: delete enabled from allocations where user_id = ? and profile_id = ?
+    fields: samerow
+  deleterange:
+    cql: delete cell, enabled from allocations where user_id = ? and profile_id = ? and test_id > ?
+    fields: samerow

@@ -1,5 +1,22 @@
 # based on https://gist.githubusercontent.com/belliottsmith/a28bd811309191195338/raw/61e096e0cf528c8e6b5e5738fef4001add509692/trades-asc.yaml
 
+# Because of the columnspec section, this generates large-ish batches. By
+# default, C* will generate warnings about this so include this in the C* yaml
+# configuration when running on cstar_perf to avoid burdening the frontend
+# with too large a log:
+#
+# batch_size_warn_threshold_in_kb: 20
+
+# to test queries over reverse-sorted tables run with
+# cassandra-stress user profile=./trades_desc.yaml ops\(insert=1\) n=10M -rate threads=300
+# cassandra-stress user profile=./trades_desc.yaml ops\(point=1\) n=10M -rate threads=300
+# cassandra-stress user profile=./trades_desc.yaml ops\(range=1\) n=10M -rate threads=300
+
+# to test queries over reverse-sorted tables run with
+# cassandra-stress user profile=./trades_desc.yaml ops\(insert=1\) n=10M -rate threads=300
+# cassandra-stress user profile=./trades_desc.yaml ops\(pointdesc=1\) n=10M -rate threads=300
+# cassandra-stress user profile=./trades_desc.yaml ops\(rangedesc=1\) n=10M -rate threads=300
+
 keyspace: findata
 
 keyspace_definition: |
@@ -22,23 +39,26 @@ table_definition: |
 
 columnspec:
   - name: second
-    cluster: uniform(1..5)
+    cluster: uniform(10..15)
   - name: millisecond
-    cluster: uniform(1..5)
+    cluster: uniform(10..15)
 
 queries:
-   latest:                # simple select, no slice, match on 2 fields
+   latestdesc:                # simple select, no slice, match on 2 fields
       cql: select * from trades where instrumentid = ? and day = ? ORDER BY second DESC, millisecond DESC LIMIT 1
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
-   latestnodesc:          # simple select, no slice, match on 2 fields
+   latest:          # simple select, no slice, match on 2 fields
       cql: select * from trades where instrumentid = ? and day = ? ORDER BY second, millisecond LIMIT 1
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
    point:                 # simple select, no slice, match on 3 fields
+      cql: select * from trades where instrumentid = ? and day = ? and second = ? ORDER BY second, millisecond LIMIT 1
+      fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
+   pointdesc:                 # simple select, no slice, match on 3 fields
       cql: select * from trades where instrumentid = ? and day = ? and second = ? ORDER BY second DESC, millisecond DESC LIMIT 1
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
-   range:                 # simple select, match on 2 fields, slice on 1
+   rangedesc:                 # simple select, match on 2 fields, slice on 1
       cql: select * from trades where instrumentid = ? and day = ? and second > ? ORDER BY second DESC, millisecond DESC LIMIT 100
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)
-   rangenodesc:           # simple select, match on 2 fields, slice on 1
+   range:           # simple select, match on 2 fields, slice on 1
       cql: select * from trades where instrumentid = ? and day = ? and second > ? ORDER BY second, millisecond LIMIT 100
       fields: samerow     # samerow or multirow (select arguments from the same row, or randomly from all rows in the partition)

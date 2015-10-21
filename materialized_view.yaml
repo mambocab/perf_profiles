@@ -1,6 +1,10 @@
 # http://pastebin.com/raw.php?i=8JPCyMkw
 # Performance Testing
 # Small Row
+#
+# run with
+# cassandra-stress user profile=./materialized_view.yaml ops\(insert=1\) n=10M cl=QUORUM -rate threads=300
+# cassandra-stress user profile=./materialized_view.yaml ops\(read=1\) n=10M cl=QUORUM -rate threads=300
 
 keyspace: perftesting2
 
