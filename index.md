@@ -1,0 +1,18 @@
+- reverse querying
+    - with indexing
+        - ./secondary_index.yaml
+    - no indexing
+        - ./trades_desc.yaml
+- large partitions
+    - ./single_partition.yaml
+- range queries
+    - forward
+        - ./user_table.yaml
+    - reverse
+        - ./user_table.yaml
+    - wide ranges
+- deletes
+    - range deletes
+        - ./user_table.yaml
+    - individual "cells"
+        - ./user_table.yaml
