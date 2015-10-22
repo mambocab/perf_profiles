@@ -12,7 +12,7 @@
 # cassandra-stress user profile=./trades_desc.yaml ops\(point=1\) n=10M -rate threads=300
 # cassandra-stress user profile=./trades_desc.yaml ops\(range=1\) n=10M -rate threads=300
 
-# to test queries over reverse-sorted tables run with
+# to test reverse queries over reverse-sorted tables run with
 # cassandra-stress user profile=./trades_desc.yaml ops\(insert=1\) n=10M -rate threads=300
 # cassandra-stress user profile=./trades_desc.yaml ops\(pointdesc=1\) n=10M -rate threads=300
 # cassandra-stress user profile=./trades_desc.yaml ops\(rangedesc=1\) n=10M -rate threads=300
