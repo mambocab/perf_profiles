@@ -2,8 +2,8 @@
 
 # dtcs timeseries profile
 # run with
-# cassandra-stress user profile=secondary_index.yaml ops\(insert=1\) n=10M -rate threads=300
-# cassandra-stress user profile=secondary_index.yaml ops\(query=1\) n=10M -rate threads=300
+# cassandra-stress user profile=timeseries_dtcs.yaml ops\(insert=1\) n=10M -rate threads=300
+# cassandra-stress user profile=timeseries_dtcs.yaml ops\(query=1\) n=10M -rate threads=300
 
 keyspace: ks
 

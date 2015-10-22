@@ -3,13 +3,13 @@
 # This is an example YAML profile for cassandra-stress
 #
 # insert data
-# cassandra-stress user profile=/home/jake/stress1.yaml ops(insert=1)
+# cassandra-stress user profile=example.yaml ops(insert=1)
 #
 # read, using query simple1:
-# cassandra-stress profile=/home/jake/stress1.yaml ops(simple1=1)
+# cassandra-stress profile=example.yaml ops(simple1=1)
 #
 # mixed workload (90/10)
-# cassandra-stress user profile=/home/jake/stress1.yaml ops(insert=1,simple1=9)
+# cassandra-stress user profile=example.yaml ops(insert=1,simple1=9)
 
 
 #
